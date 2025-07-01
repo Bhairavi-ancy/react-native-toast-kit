@@ -12,7 +12,7 @@ export interface ToastProps {
 
   subMessage?:string;
   subMsgColor?:string;
-  subMsgStyle?:string;
+  subMsgStyle?:TextStyle;
 
   borderColor?:string;
   bgColor?:string;

@@ -26,7 +26,15 @@ const ToastCard: React.FC<ToastCardProps> = ({
   variant, autoDismiss,
   onClose,
 }) => {
-  const { toastBorderColor, toastBackgroundColor, textColor, subtitleColor } = getToastColors(type);
+  const { toastBorderColor, toastBackgroundColor, textColor, subtitleColor } =
+    type !== undefined
+      ? getToastColors(type)
+      : {
+          toastBorderColor: DEFAULT_BORDER_COLOR,
+          toastBackgroundColor: DEFAULT_BACKGROUND_COLOR,
+          textColor: DEFAULT_TEXT_COLOR,
+          subtitleColor: DEFAULT_SUBTITLE_COLOR,
+        };
 
   let iconAllignment: 'flex-start' | 'flex-end' | 'center' = 'flex-end';
   if (iconPosition === 'start') iconAllignment = 'flex-start';
@@ -56,8 +64,8 @@ const ToastCard: React.FC<ToastCardProps> = ({
       >
 
 
-        {(icon || iconMap[type]) && <View style={[styles.iconWrapper, { marginRight: iconSpacing }]}>
-          {icon || iconMap[type]}
+        {(icon || (type!= undefined && iconMap[type]) ) && <View style={[styles.iconWrapper, { marginRight: iconSpacing }]}>
+          {icon || (type!= undefined && iconMap[type]) }
         </View>}
 
         <View style={styles.content}>
